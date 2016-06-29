@@ -4,7 +4,7 @@ var glob = require('glob'),
 
 module.exports = function(files, app) {
   var caller    = getCaller(),
-      callerDir = path.dirname(caller.filename);
+      callerDir = path.dirname(caller.getFileName());
 
   var _files = [];
   for(var i = 0; i<files.length; i++) {
@@ -41,7 +41,7 @@ function getCaller() {
   stack.shift() // omfg --> getCaller
 
   // Return caller's caller
-  return stack[1].receiver
+  return stack[0]
 };
 
 function getStack() {
